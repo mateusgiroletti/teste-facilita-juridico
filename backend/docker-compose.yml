@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+    juridico-app-backend:
+        build: .
+        ports:
+            - 3000:3000
+        volumes:
+            - .:/usr/juridico-app-backend
+        command: npm run dev
+    juridico-db:
+        image: postgres
+        restart: always
+        volumes:
+            - ./.docker/pg-data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=${DB_USER}
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+        ports:
+            - "5433:5432"
