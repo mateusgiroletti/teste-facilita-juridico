@@ -1,6 +1,6 @@
 import { Pool, QueryResult } from "pg";
 
-class PostgreClient {
+class PostgreeClient {
     private pool: Pool;
 
     constructor() {
@@ -28,4 +28,4 @@ class PostgreClient {
     }
 }
 
-export default PostgreClient;
+export default PostgreeClient;
