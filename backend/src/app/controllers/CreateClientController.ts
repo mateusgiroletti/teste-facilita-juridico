@@ -6,9 +6,18 @@ import { IController, IRequest, IResponse } from "../Interfaces/IController";
 const schema = z.object({
     name: z.string().min(1).max(255),
     email: z.string().email().min(1).max(150),
-    phone: z.number().min(1).max(20),
-    coordinate_x: z.number().min(1).max(11),
-    coordinate_y: z.number().min(1).max(11)
+    phone: z.string().min(1).max(20).transform(value => {
+        const parsedNumber = Number(value);
+        return parsedNumber;
+    }),
+    coordinate_x: z.string().min(1).max(11).transform(value => {
+        const parsedCoordinateX = Number(value);
+        return parsedCoordinateX;
+    }),
+    coordinate_y: z.string().min(1).max(11).transform(value => {
+        const parsedCoordinateY = Number(value);
+        return parsedCoordinateY;
+    })
 });
 
 export class CreateClientController implements IController {

@@ -11,14 +11,19 @@ export class ClientRepository {
         return result.rows;
     }
 
-    async create(client: CreateClientDTO): Promise<number> {
-        const query = `
-            INSERT INTO clients (name, mail, phone, coordinate_x, coordinate_y)
+    async create({ name, email, phone, coordinate_x, coordinate_y }: CreateClientDTO): Promise<number> {
+        try {
+            const query = `
+            INSERT INTO clients (name, email, phone, coordinate_x, coordinate_y)
             VALUES ($1, $2, $3, $4, $5)
             RETURNING id
         `;
 
-        const result = await this.postgreeClient.query(query, [client]);
-        return result.rows[0].id;
+            const result = await this.postgreeClient.query(query, [name, email, phone, coordinate_x, coordinate_y]);
+            return result.rows[0].id;
+        } catch (error) {
+            console.log(error);
+            throw new error;
+        }
     }
 }
