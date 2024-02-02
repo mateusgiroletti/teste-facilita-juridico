@@ -9,7 +9,6 @@ const PORT = process.env.SERVER_PORT;
 
 app.post("/client", makeCreateClientController());
 
-
 app.listen(PORT, () => {
     console.log(`server is listening on http://localhost:${PORT}`);
 });
