@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 DO $$ BEGIN IF NOT EXISTS (
     SELECT 1
     FROM information_schema.tables

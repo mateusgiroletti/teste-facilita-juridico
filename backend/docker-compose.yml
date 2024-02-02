@@ -4,7 +4,7 @@ services:
     juridico-app-backend:
         build: .
         ports:
-            - 3000:3000
+            - ${SERVER_PORT}:${SERVER_PORT}
         volumes:
             - .:/usr/juridico-app-backend
         command: npm run dev
@@ -17,4 +17,4 @@ services:
             - POSTGRES_USER=${DB_USER}
             - POSTGRES_PASSWORD=${DB_PASSWORD}
         ports:
-            - "5433:5432"
+            - "${DB_PORT}:${DB_PORT}"

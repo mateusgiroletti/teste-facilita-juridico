@@ -1,6 +1,6 @@
 FROM node:alpine
 
-WORKDIR /usr/fincheck-app-backend
+WORKDIR /usr/juridico-app-backend
 
 COPY package*.json ./
 

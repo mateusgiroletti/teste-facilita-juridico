@@ -9,7 +9,7 @@ class PostgreeClient {
             database: process.env.DB_DATABASE,
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
-            port: 5433,
+            port: Number(process.env.DB_PORT),
         });
     }
 
