@@ -9,8 +9,7 @@ services:
             - .:/usr/juridico-app-backend
         command: npm run dev
     juridico-db:
-        image: postgres
-        restart: always
+        image: postgres:latest
         volumes:
             - ./.docker/pg-data:/var/lib/postgresql/data
         environment:
