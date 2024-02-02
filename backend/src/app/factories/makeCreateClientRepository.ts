@@ -1,4 +1,4 @@
-import { ClientRepository } from "../repositories/ClientRepository";
+import { ClientRepository } from "../../database/repositories/ClientRepository";
 import { makePostgreeClient } from "./makePostgreeClient";
 
 export function makeClientRepository() {

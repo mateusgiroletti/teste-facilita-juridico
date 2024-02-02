@@ -1,5 +1,5 @@
 import { CreateClientDTO } from "../../database/dto/CreateClientDTO";
-import { ClientRepository } from "../repositories/ClientRepository";
+import { ClientRepository } from "../../database/repositories/ClientRepository";
 
 interface IOutput {
     id: number;
