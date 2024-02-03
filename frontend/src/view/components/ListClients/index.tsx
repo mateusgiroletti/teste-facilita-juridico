@@ -11,7 +11,7 @@ export function ListClients({ clients }: ListClientsProps) {
             <ul>
                 {clients.map((client: Client) => (
                     <li key={client.id} className="mb-2">
-                        {client.name} - {client.email} - {client.phone}
+                        {client.name} - {client.email} - {client.phone}  - {client.coordinate_x}  - {client.coordinate_y}
                     </li>
                 ))}
             </ul>
