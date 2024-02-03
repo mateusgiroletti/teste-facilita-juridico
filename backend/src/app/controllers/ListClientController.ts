@@ -4,16 +4,14 @@ import { ListClientUseCase } from "../useCases/ListClientUseCase";
 export class ListClientController implements IController {
     constructor(private readonly listClientUseCase: ListClientUseCase) { }
 
-    async handle({ params }: IRequest): Promise<IResponse> {
+    async handle(request: IRequest): Promise<IResponse> {
         try {
-            console.log(params);
-
-            const client = await this.listClientUseCase.execute();
+            const { clients } = await this.listClientUseCase.execute(request);
 
             return {
                 statusCode: 200,
                 body: {
-                    client,
+                    clients,
                 },
             };
         } catch (error) {

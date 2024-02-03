@@ -1,6 +1,7 @@
 export interface IRequest {
     body: Record<string, any>;
     params: Record<string, string>;
+    query?: Record<string, string | string[] | undefined>;
 }
 
 export interface IResponse {
