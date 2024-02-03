@@ -1,4 +1,7 @@
-interface NewClientProps {
+import { ZodError } from "zod";
+import { useCreateClientController } from "./useCreateClientController";
+
+interface CreateClientProps {
     newClient: {
         name: string;
         email: string;
@@ -8,19 +11,32 @@ interface NewClientProps {
     };
 
     onInputChange: (field: string, value: string) => void;
-    onCreateClient: () => void;
+    onCreateClient: () => Promise<void>;
+    validationError: ZodError | null;
 }
 
-export function CreateClient({ newClient, onInputChange, onCreateClient }: NewClientProps) {
+export function CreateClient({ onCreateClient }: CreateClientProps) {
+    const {
+        newClient,
+        handleInputChange,
+        createClient,
+        validationError,
+    } = useCreateClientController({ onClientCreated: onCreateClient });
+
     return (
         <>
-            <div className="w-full max-w-md">
+            <div className="w-2/5">
+                {validationError?.errors.map((error, index) => (
+                    <p key={index} className="text-red-500 text-sm mb-1">
+                        {error.message}
+                    </p>
+                ))}
                 <label className="mb-2">
                     Nome:
                     <input
                         type="text"
                         value={newClient.name}
-                        onChange={(e) => onInputChange('name', e.target.value)}
+                        onChange={(e) => handleInputChange('name', e.target.value)}
                         className="border p-2 w-full"
                     />
                 </label>
@@ -29,7 +45,7 @@ export function CreateClient({ newClient, onInputChange, onCreateClient }: NewCl
                     <input
                         type="text"
                         value={newClient.email}
-                        onChange={(e) => onInputChange('email', e.target.value)}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
                         className="border p-2 w-full"
                     />
                 </label>
@@ -38,7 +54,7 @@ export function CreateClient({ newClient, onInputChange, onCreateClient }: NewCl
                     <input
                         type="text"
                         value={newClient.phone}
-                        onChange={(e) => onInputChange('phone', e.target.value)}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
                         className="border p-2 w-full"
                     />
                 </label>
@@ -47,7 +63,7 @@ export function CreateClient({ newClient, onInputChange, onCreateClient }: NewCl
                     <input
                         type="text"
                         value={newClient.coordinate_x}
-                        onChange={(e) => onInputChange('coordinate_x', e.target.value)}
+                        onChange={(e) => handleInputChange('coordinate_x', e.target.value)}
                         className="border p-2 w-full"
                     />
                 </label>
@@ -56,16 +72,14 @@ export function CreateClient({ newClient, onInputChange, onCreateClient }: NewCl
                     <input
                         type="text"
                         value={newClient.coordinate_y}
-                        onChange={(e) => onInputChange('coordinate_y', e.target.value)}
+                        onChange={(e) => handleInputChange('coordinate_y', e.target.value)}
                         className="border p-2 w-full"
                     />
                 </label>
-
                 <div className="flex items-center justify-around mt-4">
-                    <button onClick={onCreateClient} className="bg-blue-500 text-white p-2 rounded w-1/3">
+                    <button onClick={createClient} className="bg-blue-500 text-white p-2 rounded w-1/3">
                         Cadastrar
                     </button>
-
                     <button className="bg-green-500 text-white p-2 rounded w-1/3">
                         Melhor Rota
                     </button>
