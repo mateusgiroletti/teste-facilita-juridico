@@ -1,4 +1,4 @@
-import { Client } from "../../../app/interfaces/client";
+import { Client } from "../../../app/entities/Client";
 
 interface ListClientsProps {
     clients: Client[];

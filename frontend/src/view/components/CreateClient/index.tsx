@@ -1,14 +1,9 @@
 import { ZodError } from "zod";
 import { useCreateClientController } from "./useCreateClientController";
+import { Client } from "../../../app/entities/Client";
 
 interface CreateClientProps {
-    newClient: {
-        name: string;
-        email: string;
-        phone: string;
-        coordinate_x: string;
-        coordinate_y: string;
-    };
+    newClient: Client;
 
     onInputChange: (field: string, value: string) => void;
     onCreateClient: () => Promise<void>;

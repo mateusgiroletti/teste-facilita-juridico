@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Client } from '../../../app/interfaces/client';
 import { z, ZodError } from 'zod';
+import { Client } from '../../../app/entities/Client';
+import { clientService } from '../../../app/services/clients';
 
 const clientSchema = z.object({
     name: z.string().min(1, 'O campo Nome é obrigatório').max(255, 'Limite de 255 caracteres execido'),
@@ -55,8 +56,8 @@ export function useCreateClientController({ onClientCreated }: UseCreateClientCo
 
     const loadClients = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/clients');
-            setClients(response.data?.clients);
+            const clients = await clientService.getAll();
+            setClients(clients);
         } catch (error) {
             console.error('Erro ao carregar clients:', error);
         }
