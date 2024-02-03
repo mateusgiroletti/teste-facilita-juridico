@@ -13,7 +13,7 @@ interface NewClientProps {
 
 export function CreateClient({ newClient, onInputChange, onCreateClient }: NewClientProps) {
     return (
-        <div className="flex flex-col items-center justify-center h-full">
+        <>
             <div className="w-full max-w-md">
                 <label className="mb-2">
                     Nome:
@@ -61,16 +61,16 @@ export function CreateClient({ newClient, onInputChange, onCreateClient }: NewCl
                     />
                 </label>
 
-                <div className="flex items-center justify-between mt-4">
-                    <button onClick={onCreateClient} className="bg-blue-500 text-white p-2 rounded w-1/2">
+                <div className="flex items-center justify-around mt-4">
+                    <button onClick={onCreateClient} className="bg-blue-500 text-white p-2 rounded w-1/3">
                         Cadastrar
                     </button>
 
-                    <button className="bg-green-500 text-white p-2 rounded w-1/2">
-                        Visualizar Melhor Rota
+                    <button className="bg-green-500 text-white p-2 rounded w-1/3">
+                        Melhor Rota
                     </button>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
