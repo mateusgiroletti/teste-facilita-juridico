@@ -6,7 +6,7 @@ interface ListClientsProps {
 
 export function ListClients({ clients }: ListClientsProps) {
     return (
-        <div className="mb-8 w-2/5">
+        <div className="w-2/5">
             <h2 className="text-2xl font-bold mb-4">Lista de Clientes</h2>
             <ul className="divide-y divide-gray-300">
                 {clients.map((client: Client) => (
