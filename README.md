@@ -18,7 +18,7 @@ O projeto é dividido em duas partes: backend e frontend. As tecnologias utiliza
    <li>Docker and docker compose</li>
 </ul>
 
-As instruções de uso podem ser vistas. [here](https://github.com/mateusgiroletti/teste-facilita-juridico/tree/main/frontend)
+As instruções de uso podem ser vistas. [here](https://github.com/mateusgiroletti/teste-facilita-juridico/tree/main/backend)
 
 ### Front-end
 
