@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { CreateClient } from "./view/components/CreateClient";
-import { useCreateClientController } from "./view/components/CreateClient/useCreateClientController";
+import { useClientController } from "./app/hooks/useClientController";
 import { ListClients } from "./view/components/ListClients";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
         clients,
         loadClients,
         validationError,
-    } = useCreateClientController({
+    } = useClientController({
         onClientCreated: () => {
             loadClients();
         },

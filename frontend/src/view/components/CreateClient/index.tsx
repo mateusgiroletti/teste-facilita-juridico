@@ -1,5 +1,5 @@
 import { ZodError } from "zod";
-import { useCreateClientController } from "./useCreateClientController";
+import { useClientController } from "../../../app/hooks/useClientController";
 import { Client } from "../../../app/entities/Client";
 
 interface CreateClientProps {
@@ -16,7 +16,7 @@ export function CreateClient({ onCreateClient }: CreateClientProps) {
         handleInputChange,
         createClient,
         validationError,
-    } = useCreateClientController({ onClientCreated: onCreateClient });
+    } = useClientController({ onClientCreated: onCreateClient });
 
     return (
         <>
@@ -75,7 +75,7 @@ export function CreateClient({ onCreateClient }: CreateClientProps) {
                     <button onClick={createClient} className="bg-blue-500 text-white p-2 rounded w-1/3">
                         Cadastrar
                     </button>
-                    <button className="bg-green-500 text-white p-2 rounded w-1/3">
+                    <button onClick={createClient} className="bg-green-500 text-white p-2 rounded w-1/3">
                         Melhor Rota
                     </button>
                 </div>

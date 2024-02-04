@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { z, ZodError } from 'zod';
-import { Client } from '../../../app/entities/Client';
-import { clientService } from '../../../app/services/clients';
+import { Client } from '../entities/Client';
+import { clientService } from '../services/clients';
 
 const clientSchema = z.object({
     name: z.string().min(1, 'O campo Nome é obrigatório').max(255, 'Limite de 255 caracteres execido'),
@@ -11,11 +11,11 @@ const clientSchema = z.object({
     coordinate_y: z.string().min(1, 'A coordenada Y é obrigatória').max(11, 'Limite de 11 caracteres execido'),
 });
 
-interface UseCreateClientControllerProps {
+interface UseClientControllerProps {
     onClientCreated: () => void;
 }
 
-export function useCreateClientController({ onClientCreated }: UseCreateClientControllerProps) {
+export function useClientController({ onClientCreated }: UseClientControllerProps) {
     const [newClient, setNewClient] = useState({
         name: '',
         email: '',
