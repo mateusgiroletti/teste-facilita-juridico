@@ -1,40 +1,20 @@
-import { useEffect } from "react";
+import { useClientContext } from "./app/contexts/ClientContext";
 import { CreateClient } from "./view/components/CreateClient";
-import { useClientController } from "./app/hooks/useClientController";
 import { ListClients } from "./view/components/ListClients";
+import { Modal } from "./view/components/Modal";
 
 function App() {
-    const {
-        newClient,
-        handleInputChange,
-        createClient,
-        clients,
-        loadClients,
-        validationError,
-    } = useClientController({
-        onClientCreated: () => {
-            loadClients();
-        },
-    });
-
-    useEffect(() => {
-        loadClients();
-    }, [loadClients]);
+    const { showModal } = useClientContext();
 
     return (
         <div className="flex justify-center">
             <div className="flex flex-col items-center justify-center container p-4 bg-white rounded shadow-lg">
                 <h1 className="text-3xl font-bold mb-4">Gerenciamento de Clientes</h1>
-
-                <ListClients clients={clients} />
-
-                <CreateClient
-                    newClient={newClient}
-                    onInputChange={handleInputChange}
-                    onCreateClient={createClient}
-                    validationError={validationError}
-                />
+                <ListClients />
+                <CreateClient />
             </div>
+
+            {showModal && <Modal />}
         </div>
     );
 }

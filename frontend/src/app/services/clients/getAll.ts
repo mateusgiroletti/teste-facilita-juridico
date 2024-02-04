@@ -8,7 +8,5 @@ interface ClientResponse {
 export async function getAll() {
     const { data } = await httpClient.get<ClientResponse>("/clients");
 
-    console.log(data.clients)
-
     return data;
 }

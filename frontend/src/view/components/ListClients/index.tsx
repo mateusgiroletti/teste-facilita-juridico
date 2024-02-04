@@ -1,10 +1,9 @@
+import { useClientContext } from "../../../app/contexts/ClientContext";
 import { Client } from "../../../app/entities/Client";
 
-interface ListClientsProps {
-    clients: Client[];
-}
+export function ListClients() {
+    const { clients} = useClientContext();
 
-export function ListClients({ clients }: ListClientsProps) {
     return (
         <div className="w-2/5">
             <h2 className="text-2xl font-bold mb-4">Lista de Clientes</h2>

@@ -23,15 +23,16 @@ export function useClientController({ onClientCreated }: UseClientControllerProp
         coordinate_x: '',
         coordinate_y: '',
     });
-
     const [clients, setClients] = useState<Client[]>([]);
     const [validationError, setValidationError] = useState<ZodError | null>(null);
+    const [clientsSortedByBestRoute, setClientsSortedByBestRoute] = useState<Client[]>([]);
+    const [showModal, setShowModal] = useState(false);
 
-    const handleInputChange = (field: string, value: string) => {
+    function handleInputChange(field: string, value: string) {
         setNewClient({ ...newClient, [field]: value });
     };
 
-    const createClient = async () => {
+    async function createClient() {
         try {
             const validatedClient = clientSchema.parse(newClient);
 
@@ -55,7 +56,7 @@ export function useClientController({ onClientCreated }: UseClientControllerProp
         }
     };
 
-    const loadClients = async () => {
+    async function loadClients() {
         try {
             const { clients } = await clientService.getAll();
             setClients(clients);
@@ -64,6 +65,16 @@ export function useClientController({ onClientCreated }: UseClientControllerProp
         }
     };
 
+    async function findBestRoute() {
+        try {
+            const { clients } = await clientService.bestRoute();
+            setClientsSortedByBestRoute(clients);
+            setShowModal(true);
+        } catch (error) {
+            console.error('Erro ao carregar melhor rota:', error);
+        }
+    }
+
     return {
         newClient,
         handleInputChange,
@@ -71,5 +82,9 @@ export function useClientController({ onClientCreated }: UseClientControllerProp
         clients,
         loadClients,
         validationError,
+        clientsSortedByBestRoute,
+        findBestRoute,
+        showModal,
+        setShowModal
     };
 }
