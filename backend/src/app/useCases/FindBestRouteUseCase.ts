@@ -21,8 +21,8 @@ export class FindBestRouteUseCase {
             y: client.coordinate_y,
         }));
 
-        const n = locations.length;
-        const visited: boolean[] = Array(n).fill(false);
+        const clientsLength = locations.length;
+        const visited: boolean[] = Array(clientsLength).fill(false);
         const path: number[] = [];
 
         // Começando do ponto (0,0)
@@ -31,7 +31,7 @@ export class FindBestRouteUseCase {
         path.push(current);
 
         // Encontrando o caminho mais curto usando o algoritmo de vizinho mais próximo
-        for (let i = 1; i < n; i++) {
+        for (let i = 1; i < clientsLength; i++) {
             const nearestNeighbor = this.findNearestNeighbor.execute(current, locations, visited);
             visited[nearestNeighbor] = true;
             path.push(nearestNeighbor);
