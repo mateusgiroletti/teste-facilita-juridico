@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { z, ZodError } from 'zod';
 import { Client } from '../../../app/entities/Client';
 import { clientService } from '../../../app/services/clients';
@@ -35,7 +34,9 @@ export function useCreateClientController({ onClientCreated }: UseCreateClientCo
     const createClient = async () => {
         try {
             const validatedClient = clientSchema.parse(newClient);
-            await axios.post('http://localhost:3000/clients', validatedClient);
+
+            await clientService.create(validatedClient);
+
             setValidationError(null);
             onClientCreated();
             setNewClient({
@@ -56,7 +57,7 @@ export function useCreateClientController({ onClientCreated }: UseCreateClientCo
 
     const loadClients = async () => {
         try {
-            const clients = await clientService.getAll();
+            const { clients } = await clientService.getAll();
             setClients(clients);
         } catch (error) {
             console.error('Erro ao carregar clients:', error);

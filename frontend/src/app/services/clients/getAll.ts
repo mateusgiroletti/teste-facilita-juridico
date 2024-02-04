@@ -1,10 +1,14 @@
 import { Client } from "../../entities/Client";
 import { httpClient } from "../httpClient";
 
-type ClientResponse = Array<Client>;
+interface ClientResponse {
+    clients: Client[];
+};
 
 export async function getAll() {
     const { data } = await httpClient.get<ClientResponse>("/clients");
+
+    console.log(data.clients)
 
     return data;
 }
