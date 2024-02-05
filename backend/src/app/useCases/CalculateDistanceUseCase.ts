@@ -1,12 +1,15 @@
 export class CalculateDistanceUseCase {
-    /* Fórmula para a distância Euclidiana (Distância entre dois pontos) */
-    execute(point1: { x: number; y: number }, point2: { x: number; y: number }): number {
-        // Calcula o quadrado da diferença entre as coordenas X dos dois pontos
-        const squarePointX = (point1.x - point2.x) ** 2;
-        // Calcula o quadrado da diferença entre as coordenas Y dos dois pontos
-        const squarePointY = (point1.y - point2.y) ** 2;
+    /* 
+        Função para calcular a distancia Euclidiana entre dois pontos em um plano 
+        bidimensional usando teorema de Pitágoras 
+    */
+    execute(
+        point1: { coordinate_x: number; coordinate_y: number },
+        point2: { coordinate_x: number; coordinate_y: number }
+    ): number {
+        const deltaX = point2.coordinate_x - point1.coordinate_x;
+        const deltaY = point2.coordinate_y - point1.coordinate_y;
 
-        // Calcula a raiz quadrada da soma dos quadrados das diferenças.
-        return Math.sqrt(squarePointX + squarePointY);
+        return Math.sqrt(deltaX ** 2 + deltaY ** 2);
     }
 }

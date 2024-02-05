@@ -16,31 +16,32 @@ export class FindBestRouteUseCase {
     async execute(request: IRequest): Promise<IOutput> {
         const clients = await this.clientRepo.findAll(request);
 
-        const locations = clients.map(client => ({
-            x: client.coordinate_x,
-            y: client.coordinate_y,
-        }));
+        try {
+            const bestRoute = [];
+            let currentPoint = { coordinate_x: 0, coordinate_y: 0 };
 
-        const clientsLength = locations.length;
-        const visited: boolean[] = Array(clientsLength).fill(false);
-        const path: number[] = [];
+            // Ira executar equanto houver clientes para visitar
+            while (clients.length !== 0) {
+                // Encontra o vizinho mais próximo em relação ao ponto atual
+                const nearestNeighbor = this.findNearestNeighbor.execute(
+                    currentPoint,
+                    clients
+                );
 
-        // Começando do ponto (0,0)
-        let current = 0;
-        visited[current] = true;
-        path.push(current);
+                // Adiciona o cliente mais próximo a melhor rota
+                bestRoute.push(clients[nearestNeighbor]);
 
-        // Encontrando o caminho mais curto usando o algoritmo de vizinho mais próximo
-        for (let i = 1; i < clientsLength; i++) {
-            const nearestNeighbor = this.findNearestNeighbor.execute(current, locations, visited);
-            visited[nearestNeighbor] = true;
-            path.push(nearestNeighbor);
-            current = nearestNeighbor;
+                // Atualiza o ponto atual para o cliente mais próximo
+                currentPoint = clients[nearestNeighbor];
+
+                // Remove o cliente visitado da lista de clientes
+                clients.splice(clients.findIndex((_, index) => index === nearestNeighbor), 1);
+            }
+
+            return { clients: bestRoute };
+
+        } catch (error) {
+            throw error("FindBestRouteUseCase", error);
         }
-
-        // Reorganiza a lista de clientes com base na rota encontrada
-        const bestRoute = path.map(index => clients[index]);
-
-        return { clients: bestRoute };
     }
 }

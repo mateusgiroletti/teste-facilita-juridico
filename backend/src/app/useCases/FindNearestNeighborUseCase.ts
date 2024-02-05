@@ -1,3 +1,4 @@
+import { IndexClientDTO } from "../../database/dto/IndexClientDTO";
 import { CalculateDistanceUseCase } from "./CalculateDistanceUseCase";
 
 export class FindNearestNeighborUseCase {
@@ -5,26 +6,28 @@ export class FindNearestNeighborUseCase {
         private readonly calculateDistanceUseCase: CalculateDistanceUseCase,
     ) { }
 
-    execute(current: number, locations: { x: number; y: number }[], visited: boolean[]): number {
-        let minDistance = Infinity;
-        let nearestNeighbor = -1;
+    execute(
+        point: { coordinate_x: number; coordinate_y: number },
+        availablePoints: IndexClientDTO[]
+    ): number {
+        let minimumDistance = Infinity;
+        let nearestNeighborIndex = -1;
 
         /* 
-            Usa CalculateDistanceUseCase para calcular a distância 
-            entre o ponto atual e cada outro ponto não visitado,
-            para encontrar o vizinho mais próximo e retonar a posição deste elemento.
-        */
-       
-        for (let i = 0; i < locations.length; i++) {
-            if (!visited[i] && i !== current) {
-                const d = this.calculateDistanceUseCase.execute(locations[current], locations[i]);
-                if (d < minDistance) {
-                    minDistance = d;
-                    nearestNeighbor = i;
-                }
+           Usa CalculateDistanceUseCase para calcular a distância 
+           entre o ponto atual e cada outro ponto não visitado,
+           para encontrar o vizinho mais próximo e retonar a posição deste elemento.
+       */
+
+        for (let i = 0; i < availablePoints.length; i++) {
+            const distance = this.calculateDistanceUseCase.execute(point, availablePoints[i]);
+
+            if (distance < minimumDistance) {
+                minimumDistance = distance;
+                nearestNeighborIndex = i;
             }
         }
 
-        return nearestNeighbor;
+        return nearestNeighborIndex;
     }
-} 
+}
