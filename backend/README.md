@@ -8,9 +8,14 @@ Dividi a aplicação em algumas camadas:
     <li>Controller: Responsável por receber as requisições do usuário. Ele valida os dados de entrada usando a biblioteca Zod, garantindo que os dados atendam aos critérios definidos.</li>
     <li>UseCase: É uma camada intermediária que contém a lógica de negócios da aplicação. O Controller chama o UseCase, passando os dados validados. Essa camada pode realizar transformações nos dados e orquestrar diversas operações antes de interagir com o banco de dados.</li>
     <li>Repository: É responsável pela comunicação direta com o banco de dados. O UseCase chama métodos do Repository para realizar operações de leitura ou escrita no banco de dados. Essa camada atua como uma ponte entre a lógica de negócios do UseCase e a persistência de dados.</li>
+    <li>DTO: garantindo uma melhor manutenção, desempenho, segurança e flexibilidade</li>
 </ul>
 
 Apliquei conceitos de inversão e injeção de dependencia buscando assim boas práticas de arquitetura, garantindo uma separação clara das responsabilidades entre as diferentes camadas da aplicação. Isso facilita a manutenção, testabilidade e escalabilidade.
+
+## Testes
+
+Realizei testes unitários para os casos de uso, garantindo assim que a regra de negócio esteja funcionando corretamente.
 
 ## Como resolvi a parte 2
 
