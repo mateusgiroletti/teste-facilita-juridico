@@ -1,19 +1,28 @@
 version: '3'
 
 services:
-    juridico-app-backend:
+    juridico-db:
+        build: .docker/database/
+        container_name: juridico-db
+        restart: always
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - "${DB_PORT}:5432"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+    juridico-node:
         build: .
+        container_name: juridico-node
+        restart: always
         ports:
             - ${SERVER_PORT}:${SERVER_PORT}
+        depends_on:
+            - juridico-db
         volumes:
-            - .:/usr/juridico-app-backend
+            - .:/usr/juridico-node
         command: npm run dev
-    juridico-db:
-        image: postgres:latest
-        volumes:
-            - ./.docker/pg-data:/var/lib/postgresql/data
-        environment:
-            - POSTGRES_USER=${DB_USER}
-            - POSTGRES_PASSWORD=${DB_PASSWORD}
-        ports:
-            - "${DB_PORT}:${DB_PORT}"
+volumes:
+    postgres_data:

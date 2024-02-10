@@ -1,6 +1,6 @@
 FROM node:alpine
 
-WORKDIR /usr/juridico-app-backend
+WORKDIR /usr/juridico-node
 
 COPY package*.json ./
 
