@@ -1,8 +1,8 @@
-import { useClientContext } from "../../../app/contexts/ClientContext";
 import { Client } from "../../../app/entities/Client";
+import { useListClient } from "./useListClient";
 
 export function ListClients() {
-    const { clients} = useClientContext();
+    const { clients } = useListClient();
 
     return (
         <div className="w-2/5">

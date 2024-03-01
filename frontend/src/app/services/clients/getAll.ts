@@ -1,7 +1,7 @@
 import { Client } from "../../entities/Client";
 import { httpClient } from "../httpClient";
 
-interface ClientResponse {
+export interface ClientResponse {
     clients: Client[];
 };
 

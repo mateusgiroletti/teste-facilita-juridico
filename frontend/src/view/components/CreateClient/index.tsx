@@ -1,7 +1,20 @@
-import { useClientContext } from '../../../app/contexts/ClientContext';
+import { useNewClient } from './useNewClient';
 
 export function CreateClient() {
-    const { newClient, handleInputChange, createClient, validationError, findBestRoute } = useClientContext();
+    const {
+        validationError,
+        handleSubmitCreateClient,
+        name,
+        handleNameChange,
+        email,
+        handleEmailChange,
+        phone,
+        handlePhoneChange,
+        coordinateX,
+        handleCoordinateXChange,
+        coordinateY,
+        handleCoordinateYChange
+    } = useNewClient();
 
     return (
         <div className="w-2/5">
@@ -14,8 +27,8 @@ export function CreateClient() {
                 Nome:
                 <input
                     type="text"
-                    value={newClient.name}
-                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    value={name}
+                    onChange={handleNameChange}
                     className="border p-2 w-full"
                 />
             </label>
@@ -23,8 +36,8 @@ export function CreateClient() {
                 Email:
                 <input
                     type="text"
-                    value={newClient.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    value={email}
+                    onChange={handleEmailChange}
                     className="border p-2 w-full"
                 />
             </label>
@@ -32,8 +45,8 @@ export function CreateClient() {
                 Telefone:
                 <input
                     type="text"
-                    value={newClient.phone}
-                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                    value={phone}
+                    onChange={handlePhoneChange}
                     className="border p-2 w-full"
                 />
             </label>
@@ -41,8 +54,8 @@ export function CreateClient() {
                 Coordenada X:
                 <input
                     type="text"
-                    value={newClient.coordinate_x}
-                    onChange={(e) => handleInputChange('coordinate_x', e.target.value)}
+                    value={coordinateX}
+                    onChange={handleCoordinateXChange}
                     className="border p-2 w-full"
                 />
             </label>
@@ -50,16 +63,16 @@ export function CreateClient() {
                 Coordenada Y:
                 <input
                     type="text"
-                    value={newClient.coordinate_y}
-                    onChange={(e) => handleInputChange('coordinate_y', e.target.value)}
+                    value={coordinateY}
+                    onChange={handleCoordinateYChange}
                     className="border p-2 w-full"
                 />
             </label>
             <div className="flex items-center justify-around mt-4">
-                <button onClick={createClient} className="bg-blue-500 text-white p-2 rounded w-1/3">
+                <button onClick={handleSubmitCreateClient} className="bg-blue-500 text-white p-2 rounded w-1/3">
                     Cadastrar
                 </button>
-                <button onClick={findBestRoute} className="bg-green-500 text-white p-2 rounded w-1/3">
+                <button /* onClick={findBestRoute} */ className="bg-green-500 text-white p-2 rounded w-1/3">
                     Melhor Rota
                 </button>
             </div>
