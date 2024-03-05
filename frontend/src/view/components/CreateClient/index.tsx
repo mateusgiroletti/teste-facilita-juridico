@@ -1,6 +1,10 @@
 import { useNewClient } from './useNewClient';
 
-export function CreateClient() {
+interface CreateClientprops {
+    onFindBestRoute: () => {};
+}
+
+export function CreateClient({onFindBestRoute}: CreateClientprops) {
     const {
         validationError,
         handleSubmitCreateClient,
@@ -72,7 +76,7 @@ export function CreateClient() {
                 <button onClick={handleSubmitCreateClient} className="bg-blue-500 text-white p-2 rounded w-1/3">
                     Cadastrar
                 </button>
-                <button /* onClick={findBestRoute} */ className="bg-green-500 text-white p-2 rounded w-1/3">
+                <button onClick={onFindBestRoute} className="bg-green-500 text-white p-2 rounded w-1/3">
                     Melhor Rota
                 </button>
             </div>

@@ -1,8 +1,13 @@
-import { useClientContext } from "../../../app/contexts/ClientContext";
+import { Dispatch, SetStateAction } from "react";
+import { Client } from "../../../app/entities/Client";
 import { ModalPortal } from "./ModalPortal";
 
-export function Modal() {
-    const { clientsSortedByBestRoute, setShowModal } = useClientContext();
+interface ModalProps {
+    clients: Client[];
+    setShowModal: (Dispatch<SetStateAction<boolean>>);
+}
+
+export function Modal({ clients, setShowModal }: ModalProps) {
 
     return (
         <ModalPortal>
@@ -11,7 +16,7 @@ export function Modal() {
                     <div className="modal-content ">
                         <h2 className="text-2xl font-bold mb-4">Melhor Rota</h2>
                         <ul className="list-disc pl-4">
-                            {clientsSortedByBestRoute.map((client) => (
+                            {clients.map((client) => (
                                 <li key={client.id} className="mb-2">
                                     {client.name} - X: {client.coordinate_x}, Y: {client.coordinate_y}
                                 </li>

@@ -21,7 +21,6 @@ export function useNewClient() {
 
     const { loadClients } = useListClient();
 
-
     function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
         setName(event.target.value);
     }
@@ -66,6 +65,7 @@ export function useNewClient() {
             await clientService.create(validatedClient);
 
             setValidationError(null);
+            loadClients();
         } catch (error) {
             if (error instanceof z.ZodError) {
                 setValidationError(error);
@@ -74,7 +74,6 @@ export function useNewClient() {
             }
         } finally {
             resetFields();
-            loadClients();
         }
     };
 
